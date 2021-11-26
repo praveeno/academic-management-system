@@ -1,0 +1,24 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left"
+              md-disable-backdrop md-whiteframe="4">
+<md-toolbar class="fivteenHeight" layout layout-align="space-between center">
+  <h1 class="md-toolbar-tools white">Menu</h1>
+  <md-button ng-click="toggleLeft()" class="md-icon-button">
+    <md-icon md-svg-icon="/static/assets/close.svg"></md-icon>
+  </md-button>
+</md-toolbar>
+
+<md-content layout="column" layout-margin>
+    <md-button ng-href="#/timeline">
+    Timeline  
+    </md-button>  
+      <md-button ng-href="#/timetable">
+  Timetable
+    </md-button>  
+      <md-button ng-href="#/assignment">
+  Assignment
+    </md-button>  
+    <md-button ng-href="#/notification">
+  Notification
+    </md-button>  
+</md-content>
+</md-sidenav>

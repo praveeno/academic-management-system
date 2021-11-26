@@ -1,0 +1,42 @@
+<md-content flex>
+	<md-subheader>Notification To All Year</md-subheader>
+	<md-list>
+		<md-list-item class="md-3-line"
+		ng-repeat="item in allNotificationData">
+			<div layout layout-align="start center" style="width: 100vw">
+				<div flex="95" layout layout-align="start center">
+					<img ng-src="{{data.Create.who.photo}}" alt="{{data.Create.who.name}}" class="md-avatar"/>
+					<div flex="grow">
+						<h3>{{item.title}}</h3>
+						<div>
+							<p>{{item.content}}</p>
+							<p>{{item.Create.date | date:'medium'}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+        	<md-divider> 
+        	</md-divider>
+      	</md-list-item>
+	</md-list>
+	<md-subheader>Notification For Your Year</md-subheader>
+	<md-list>
+		<md-list-item class="md-3-line"
+		ng-repeat="item in yearNotificationData">
+			<div layout layout-align="start center"  style="width: 100vw">
+				<div flex="95" layout layout-align="start center">
+					<img ng-src="{{data.Create.who.photo}}" alt="{{data.Create.who.name}}" class="md-avatar"/>
+					<div flex="grow">
+						<h3>{{item.title}}</h3>
+						<div>
+							<p>{{item.content}}</p>
+							<p>{{item.Create.date | date:'medium'}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+        	<md-divider> 
+        	</md-divider>
+      	</md-list-item>
+	</md-list>
+</md-content>

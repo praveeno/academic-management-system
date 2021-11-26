@@ -1,0 +1,42 @@
+body {
+  padding: 50px;
+  font: 14px Helvetica, Arial, sans-serif;
+  font-size: 100%; }
+
+/* SMART TIME styles */
+.smart-time {
+  position: relative; }
+
+.smt-input {
+  width: 56px;
+  height: 22px;
+  line-height: 22px;
+  font-size: 1em;
+  padding: 4px 10px;
+  border: 1px solid #eeeeee;
+  outline: none; }
+
+.smt-suggestions {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #eee;
+  top: 33px;
+  left: 0;
+  width: 76px;
+  background-color: #fff;
+  box-shadow: 1px 3px 4px rgba(140, 140, 140, 0.4); }
+  .smt-suggestions ul {
+    list-style: none;
+    padding: 2px 2px;
+    margin: 0; }
+    .smt-suggestions ul li {
+      display: block;
+      padding: 2px 2px;
+      line-height: 1.2em;
+      height: 1.2em;
+      font-size: 0.9em;
+      cursor: pointer; }
+      .smt-suggestions ul li.selected {
+        background-color: rgba(102, 173, 255, 0.9); }
+      .smt-suggestions ul li:hover {
+        background-color: #eeeeee; }

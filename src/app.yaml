@@ -1,0 +1,40 @@
+application: test-7ffb9
+version: ml1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /_ah/spi/.*
+  script: apis.main.init
+
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /sw.js
+  static_files: sw.js
+  upload: sw.js
+
+- url: /menifest.json
+  static_files: menifest.json
+  upload: menifest.json 
+
+- url: /static/js
+  static_dir: static/js
+
+- url: /bower_components
+  static_dir: bower_components
+
+- url: /static/style/css
+  static_dir: static/style/css
+
+- url: /static/assets
+  static_dir: static/assets
+
+- url: /static/templates
+  static_dir: static/templates
+
+libraries:
+- name: endpoints
+  version: 1.0

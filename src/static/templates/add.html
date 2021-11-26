@@ -1,0 +1,347 @@
+<md-tabs md-dynamic-height md-border-bottom  md-swipe-content="false" md-center-tabs>
+  <md-tab label="Activity" id="activity" md-on-select="activityTab = true" md-on-deselect="activityTab = false">
+    <md-content class="md-padding" layout-align="start center" layout="column">
+       <form name="activityForm" novalidate ng-submit="sendActivity()" layout-padding>
+          <md-input-container class="md-block">
+            <label>Title</label>
+            <input md-maxlength="30" ng-required="true" md-no-asterisk  ng-model="activity.title" name="title">
+            <div ng-messages="activityForm.title.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Content </label>
+            <input md-maxlength="100" ng-required="true" md-no-asterisk  ng-model="activity.content" name="content">
+            <div ng-messages="activityForm.content.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Where this happen</label>
+            <input md-maxlength="30" ng-required="true" md-no-asterisk  ng-model="activity.where" name="where">
+            <div ng-messages="activityForm.where.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>When happen?</label>
+            <!-- <md-datepicker name="dob" style="width: 100vw" ng-model="activity.when" md-min-date="minDate" md-max-date="maxDate" required  md-open-on-focus></md-datepicker> -->
+            <input name="dob" type="date" ng-model="activity.when" md-min-date="minDate" md-max-date="maxDate" required>
+            <div ng-messages="activityForm.dob.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+            </md-input-container>
+             <md-select ng-model="activity.year" placeholder="this activity belong to year??"  required md-no-asterisk="true">
+                <md-option value="csone">1<sup>st</sup>Year</md-option>
+                <md-option value="cstwo">2<sup>nd</sup>Year</md-option>
+                <md-option value="csthree">3<sup>rd</sup>Year</md-option>
+                <md-option value="csfour">4<sup>th</sup>Year</md-option>
+                <md-option value="timeline">All Year</md-option>
+            </md-select>
+          <md-input-container class="md-block">
+            <label>conatct to regarding this ??</label>
+            <input md-maxlength="30" ng-required="true" md-no-asterisk name="name" ng-model="activity.contact.name" >
+            <div ng-messages="activityForm.name.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>conatct person mobile number??</label>
+            <input md-maxlength="10" ng-required="true" md-no-asterisk name="phone" ng-model="activity.contact.phone">
+            <div ng-messages="activityForm.phone.$error || activityForm.$submitted">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+            <md-select ng-model="activity.type" placeholder="Is This Activity Or Notification??"  required md-no-asterisk="true">
+                <md-option value="activity">Activity</md-option>
+                <md-option value="notification">Notification</md-option>
+            </md-select>
+            <p>Activity can be view in timeline, whereas notification view in different section, activity can be rated and indicate as event,and notification is just to provide some information, e.g. "class of 3<sup>rd</sup> year schedule at room 302"
+          <div>
+            <span ng-if="plzFillForm">Please Fill Form</span>
+            <span ng-if="success">Successfully Update</span>
+            <span ng-if="error">Error! Try Again</span>
+            <md-button class="md-raised md-primary" type="submit">Save</md-button>
+        </form>
+    </md-content>
+  </md-tab>
+  <md-tab label="Assignment" id="notification" md-on-select="notification = true" md-on-deselect="notification = false">
+    <md-content class="md-padding">
+      <div style="margin-top: 50px;">
+        <form name="assignmentForm" novalidate ng-submit="sendAssignment()">
+          <md-card layout="column">
+            <div layout="row" layout-align="center start" style="margin-top: -50px;">
+              <div layout-align="center start">
+                <img src="{{teacher.photo}}" style="width: 20vw; height:20vw;border-radius: 50%">
+              </div>
+            </div>
+            <div>
+              <md-select ng-model="assignment.year" placeholder="Year"  required md-no-asterisk="true" >
+                  <md-option ng-repeat="data in teacher.loop" value="{{data.year}}">
+                    <span ng-if="data.year == 'csone'">1<sup>st</sup>Year</span>
+                    <span ng-if="data.year == 'cstwo'">2<sup>nd</sup>Year</span>
+                    <span ng-if="data.year == 'csthree'">3<sup>rd</sup>Year</span>
+                    <span ng-if="data.year == 'csfour'">4<sup>th</sup>Year</span>
+                  </md-option>
+              </md-select>
+               <md-select ng-model="assignment.subject" placeholder="{{assignment.year == ''?'select year':'subject'}}"  required md-no-asterisk="true">
+                <span ng-if="assignment.year != ''">
+                  <md-option ng-repeat="data in teacher.loop" value="{{data.subject}}" ng-if="data.year == assignment.year">
+                    <span>{{data.subject}}</span>
+                  </md-option>
+                </span>
+                <span ng-if="assignment.year == ''">
+                  <md-option>
+                  Plz select year 
+                  </md-option>
+                </span>
+              </md-select>
+              <md-input-container class="md-block" flex="85">
+                <label>Last date to submit</label>
+                <input type="date" ng-required="true" md-no-asterisk  ng-model="assignment.lastDate" name="lastDate">
+                <div ng-messages="assignmentForm.lastDate.$error || assignmentForm.$submitted">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+              <div>
+                <div layout="row" ng-repeat="question in questionBank track by $index">
+                  <md-input-container class="md-block" flex="85">
+                    <label>Question {{$index}}</label>
+                    <input ng-required="true" md-no-asterisk  ng-model="assignment.question[$index]" name="question">
+                    <div ng-messages="assignmentForm.question.$error || assignmentForm.$submitted">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                  <md-button ng-click="deleteQuestion($index)" class="md-icon-button md-raised md-primary">
+                    <md-icon md-svg-icon="/static/assets/close.svg"></md-icon>
+                  </md-button>
+                </div>
+                <span ng-if="plzFillFormAssignment">Please Fill Form</span>
+                <span ng-if="successAssignment">Successfully Update</span>
+                <span ng-if="errorAssignment">Error! Try Again</span>
+                <md-button class="md-raised md-primary" type="button" ng-click="addQuestions()">Add Question</md-button>
+                <md-button class="md-raised md-primary" type="submit" ng-click="sendAssignment()">Save</md-button>
+              </div>
+            </div>
+          </md-card>
+        </form>
+      </div>
+    </md-content>
+  </md-tab>
+  <md-tab label="timetable" id="timetable" md-on-select="timetableTab = true" md-on-deselect="timetableTab = false">
+    <md-content class="md-padding">
+      <h3 class="md-display-2">{{Date}}</h3>
+      <p>Please select year first</p>
+      <md-select ng-model="timetableYear" placeholder="For Which Year"   md-no-asterisk="true" ng-change="checkYear()">
+        <md-option value="csone">
+        1<sup>st</sup> Year
+        </md-option>
+        <md-option value="cstwo">
+        2<sup>nd</sup> Year
+        </md-option>
+        <md-option value="csthree">
+        3<sup>rd</sup> Year
+        </md-option>
+        <md-option value="csfour">
+        4<sup>th</sup> Year
+        </md-option>
+      </md-select>
+      <md-select ng-model="timetableweekname" placeholder="For Which Day"  md-no-asterisk="true" ng-change="SearchTimeTable(); checkWeek(); addName(timetableweekname);" ng-disabled="selectweek">
+        <md-option value="monday">
+        Monday
+        </md-option>
+        <md-option value="tuesday">
+        Tuesday
+        </md-option>
+        <md-option value="wednesday">
+        Wednesday
+        </md-option>
+        <md-option value="thrusday">
+        Thrusday
+        </md-option>
+        <md-option value="friday">
+        Friday
+        </md-option>
+        <md-option value="saturday">
+        Saturday
+        </md-option>
+      </md-select>
+      <div layout="column">
+        <div layout layout-align="space-around start" style="border:0 1px 1px 1px solid black; ">
+          <div layout-align="start start" flex="100/3">
+             Start Time
+          </div>
+          <div layout-align="start start" flex="100/3">
+            Subject
+          </div>
+          <div layout-align="start start" flex="100/3">
+            Teacher
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div layout>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].one.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].one.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].one.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].two.time" name="">
+
+            </md-input-container>
+             <div class="smart-time" smt-name="time.name" smart-time="" smt-value="time.value" smt-required="time.required" smt-form="smartTimeTest"></div>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].two.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].two.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].three.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].three.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].three.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].four.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].four.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].four.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].five.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].five.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].five.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].six.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].six.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].six.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].seven.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].seven.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].seven.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <div layout layout-align="space-between start">
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>HH:MM:AM</label>
+                <input type="time" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].eight.time" name="">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Subject</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].eight.subject" name="subject">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container class="md-block" flex="100/3">
+                <label>Teacher</label>
+                <input type="text" ng-disabled="selectYear" md-no-asterisk ng-model="timetable.object[timetableweekname].eight.teacher" name="subject">
+            </md-input-container>
+          </div>
+        </div>
+        <md-button class="md-raised md-primary" type="submit" ng-click="SendTimeTable();selectYear = true">Save</md-button>
+      </div>
+    </md-content>
+  </md-tab>
+</md-tabs>

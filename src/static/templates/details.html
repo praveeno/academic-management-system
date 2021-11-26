@@ -1,0 +1,91 @@
+<form name="form" novalidate ng-submit="send()">
+	<div layout="column" layout-align-gt-sm="center start" layout-align="start start">
+		<md-card md-colors="::{backgroundColor: '{{theme}}-primary-700'}" style="width: 98%">
+		  <md-card-title>
+		    <md-card-title-media>
+		      <div class="md-media-sm card-media" layout md-colors="::{background: '{{theme}}-accent'}">
+		        <img src="{{user.login.user.providerData[0].photoURL}}" style="border-radius: 50%">
+		      </div>
+		    </md-card-title-media>
+		    <md-card-title-text style="padding-left: 16px">
+		      <span class="md-headline">{{user.login.user.providerData[0].displayName}}</span>
+		      <span class="md-subhead description">{{user.login.user.providerData[0].email}}</span>
+		    </md-card-title-text>
+		  </md-card-title>
+		</md-card>
+		<md-card style="width: 98%" layout="column">
+		<div layout layout-align="space-between center" class="md-headline" layout-padding>
+		      <span >I'm Student !!!</span>
+		      <span>
+		      	<md-switch ng-model="isstudent" ng-click="isteacher = false" aria-label="Switch 2" ng-true-value="'yes'" ng-false-value="'no'" class="md-warn">
+				</md-switch>
+		      </span>
+		    </div>
+	  		<div layout layout-align="space-between center" class="md-headline" layout-padding>
+		      <span >I'm Teacher !!!</span>
+		      <span>
+		      	<md-switch ng-model="isteacher" ng-click="isstudent = false" aria-label="Switch 2" ng-true-value="'yes'" ng-false-value="'no'" class="md-warn">
+				</md-switch>
+		      </span>
+		    </div>
+		    <div class="md-subhead" ng-show="isteacher == 'yes'" layout-padding layout="column">
+		    	<span>First please verify that you are teacher !
+		    	</span>  
+			    <md-input-container >
+			        <label>Secret Code </label>
+			        <input ng-model="secret">
+			    </md-input-container>
+			    <span>In case did not have secret code, please contact system administrator</span>
+		    </div>
+		</md-card>
+	       <md-card ng-show="isstudent == 'yes' && isstudent != ''"  style="width: 98%" ng-if="secret == '' || secret != 'collegeadmin'" layout="column">
+			    <md-card-title>
+			      <md-card-title-text>
+			        <span class="md-headline">Senior Or Junior??</span>
+			        <span class="md-subhead">Choose which class you belong</span>
+			      </md-card-title-text>
+			    </md-card-title>
+
+			    <md-card-content>
+			      <div layout="row" layout-align="space-between center">
+			        <span>What is your study-year?</span>
+			        <md-select ng-model="user.year" placeholder="Year" class="md-no-underline" required md-no-asterisk="true">
+			          <md-option value="csone">1<sup>st</sup> year</md-option>
+			          <md-option value="cstwo">2<sup>nd</sup> year</md-option>
+			          <md-option value="csthree">3<sup>rd</sup> year</md-option>
+			          <md-option value="csfour">4<sup>th</sup> year</md-option>
+			        </md-select>
+			      </div>
+
+			      <div layout="row" layout-align="space-between center">
+			        <span>Which branch you are in?</span>
+			        <md-select ng-model="user.branch" placeholder="Branch" class="md-no-underline" required md-no-asterisk="true">
+			          <md-option value="cloth">Obviously CS</md-option>
+			        </md-select>
+			      </div>
+
+			    </md-card-content>
+	  		</md-card>
+	  		<md-card style="width: 98%" ng-if="secret == 'collegeadmin'">
+				<md-card-title>
+				  <md-card-title-text>
+				    <span class="md-headline">Teacher Detail??</span>
+				    <span class="md-subhead">Choose which class you teach</span>
+				    <div ng-repeat="subject in dataset track by $index">
+				    	<teacher data="details" number="{{$index}}"></teacher>
+				    	<md-divider></md-divider>
+				    </div>
+				    <div layout-align="end center" layout>
+				    <div ng-if="showError">First Fill Fields</div>
+					    <md-button class="md-fab md-mini" aria-label="Use Android" ng-click="addSubject()">
+				          <md-icon md-svg-src="/static/assets/add.svg"></md-icon>
+				        </md-button>
+			        </div>
+				  </md-card-title-text>
+				</md-card-title>
+	  		</md-card>
+	  		<div layout layout-align="center start" style="width: 100%">
+	  			<md-button class="md-raised md-primary" type="submit">Save</md-button>
+	  		</div>
+	</div>
+</form>

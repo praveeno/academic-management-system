@@ -1,0 +1,33 @@
+
+<md-content flex>
+	<md-list>
+		<md-list-item class="md-3-line"
+		ng-repeat="item in assignment">
+			<div layout="column">
+				<md-subheader style="width: 100vw" class="white grey">{{item.$id}}</md-subheader>
+				<div layout="column">
+					<div ng-repeat="data in item">
+						<div layout layout-align="start center">
+							<div flex="95" layout layout-align="start center">
+								<img ng-src="{{data.Create.who.photo}}" alt="{{data.Create.who.name}}" class="md-avatar"/>
+								<div  layout-margin>
+									<h3>Assignment Of {{data.Create.date | date}}</h3>
+									<div>
+										<h4>Last date to submit</h4>
+										<p>{{data.lastdate | date}}</p>
+									</div>
+									<h5>Questions</h5>
+									<div ng-repeat="q in data.question">
+									Q{{$index + 1}}. {{q}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        	<md-divider>
+        	</md-divider>
+      	</md-list-item>
+	</md-list>
+</md-content>

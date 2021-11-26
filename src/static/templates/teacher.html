@@ -1,0 +1,71 @@
+<form name="data.form[number]">
+  <md-card-content>
+    <div layout="row" layout-align="space-between center">
+      <span>Which year you teach?</span>
+      <md-select ng-model="data.subjectData[number].year" placeholder="Year" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="csone">1<sup>st</sup> year</md-option>
+        <md-option value="cstwo">2<sup>nd</sup> year</md-option>
+        <md-option value="csthree">3<sup>rd</sup> year</md-option>
+        <md-option value="csfour">4<sup>th</sup> year</md-option>
+      </md-select>
+    </div>
+
+    <div layout="row" layout-align="space-between center">
+      <span>Which branch you teach?</span>
+      <md-select ng-model="data.subjectData[number].branch" placeholder="Branch" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="cloth">Now CS only</md-option>
+      </md-select>
+    </div>
+
+    <div layout="column" layout-align="space-between center">
+      <span>what you teach?</span>
+      <md-select ng-model="drink" ng-show="data.subjectData[number].year == ''" placeholder="Select year" class="md-no-underline" required md-no-asterisk="true">
+      </md-select>
+      <md-select ng-model="data.subjectData[number].subject" ng-show="data.subjectData[number].year == 'csone'" placeholder="subject" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="C">C language</md-option>
+      </md-select>
+      <md-select ng-model="data.subjectData[number].subject" ng-show="data.subjectData[number].year == 'cstwo'" placeholder="subject" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="edc">Electronic Devices and Circuits</md-option>
+        <md-option value="dsa">Data Structures and Algorithms </md-option>
+        <md-option value="de">Digital Electronics</md-option>
+        <md-option value="flsp">Linux and Shell Programming</md-option>
+        <md-option value="oop">Object Oriented Programming </md-option>
+        <md-option value="math">Advanced Engineering Mathematics</md-option>
+  	  <md-option value="ppl">Principles of Programming Languages</md-option>
+  	<md-option value="mp">Microprocessors and Interfaces </md-option>
+  	<md-option value="dms">Dicrete Mathematical Structures </md-option>
+  	<md-option value="spt">Statistics and Probability Theory</md-option>
+  	<md-option value="se">Software Engineering </md-option>
+  	<md-option value="poc">Principles of Communication</md-option>
+
+      </md-select>
+      <md-select ng-model="data.subjectData[number].subject" ng-show="data.subjectData[number].year == 'csthree'" placeholder="subject" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="ca">Computer Architecture</md-option>
+        <md-option value="dld">Digital Logic Design</md-option>
+        <md-option value="tef">Telecommunication Fundamentals</md-option>
+        <md-option value="dbms"> Database Management Systems</md-option>
+        <md-option value="os">Operating Systems</md-option>
+        <md-option value="ads">Advanced Data Structure </md-option>
+        <md-option value="cn">Computer Networks</md-option>
+        <md-option value="daa">Design and Analysis of Algorithms</md-option>
+        <md-option value="toc">Theory Of Computation</md-option>
+        <md-option value="cg">Computer Graphics and Multimedia
+  Techniques</md-option>
+        <md-option value="es">Embedded System Design</md-option>
+        <md-option value="ai">Artificial Intelligence</md-option>
+      </md-select>
+      <md-select ng-model="data.subjectData[number].subject" ng-show="data.subjectData[number].year == 'csfour'" placeholder="subject" class="md-no-underline" required md-no-asterisk="true">
+        <md-option value="cc">Cloud Computing</md-option>
+        <md-option value="iss">Information System Security</md-option>
+        <md-option value="dmh">Data Mining & Ware Housing</md-option>
+        <md-option value="cad">Computer Aided Design for VLSI</md-option>
+        <md-option value="compiler">Compiler Construction</md-option>
+        <md-option value="adbms">Advance DataBase Management</md-option>
+        <md-option value="mc">Mobile Computing </md-option>
+        <md-option value="dip"> Digital Image Processing</md-option>
+        <md-option value="ds">Distributed Systems</md-option>
+        <md-option value="rts">Real Time Systems</md-option>
+      </md-select>
+    </div>
+  </md-card-content>
+</form>

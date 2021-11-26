@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp.main">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>College App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/style/css/app-style.css">
+    <link rel="stylesheet" href="/static/style/css/main.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,400,,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+    <script src="bower_components/google-closure-library/closure/goog/base.js"></script>
+    <link rel="manifest" href="/menifest.json">
+  </head>
+  <body ng-controller="mainctrl">
+    <div ng-include="static/templates/sidenav.html"></div>
+    <div ng-include="static/templates/main-toolbar.html"></div>
+    <md-content flex>
+        <div layout layout-align="center center" ng-show="user.loader">
+          <md-progress-circular active></md-progress-circular>
+        </div>
+        <div ng-view ng-hide="user.loader"></div>
+    </md-content>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+    -->
+    <script type="text/javascript">
+      if('serviceWorker' in navigator)
+      {
+        navigator.serviceWorker.register('/sw.js').then(function() {
+          console.log("sw registered");
+        })
+      }
+    </script>
+    <div ng-include="imports/import_js.html"></div>
+  </body>
+</html>

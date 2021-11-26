@@ -6,3 +6,4 @@ src/static/libs/
 *.log
 *.pyc
 .idea/
+bower_components/
